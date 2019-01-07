@@ -1,0 +1,24 @@
+from flask import Flask,render_template,flash,redirect,url_for,session,logging
+from data import Articles
+import cx_Oracle
+con = cx_Oracle.connect("rony/rony@localhost/Orcl")
+
+#print(__name__)
+app = Flask(__name__)
+    #first Articles is the name of variables and second is the created function name Articles()
+Articles = Articles()
+@app.route('/')
+def index():
+    return render_template("home.html")
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+@app.route('/articles')
+def articles():
+    return render_template("articles.html", articles = Articles)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
